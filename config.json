@@ -1,0 +1,14 @@
+{
+  "development":{
+    "macaroon_location": "/Users/evanfeenstra/code/lnd-dev/alice/data/chain/bitcoin/simnet/admin.macaroon",
+    "tls_location": "/Users/evanfeenstra/Library/Application Support/Lnd/tls.cert",
+    "node_ip": "127.0.0.1",
+    "lnd_port": "10001"
+  },
+  "production":{
+    "macaroon_location": "/home/ubuntu/.lnd/data/chain/bitcoin/mainnet/admin.macaroon",
+    "tls_location": "/home/ubuntu/.lnd/tls.cert",
+    "node_ip": "localhost",
+    "lnd_port": "10009"
+  }
+}
