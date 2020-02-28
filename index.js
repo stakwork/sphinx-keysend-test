@@ -8,8 +8,6 @@ var sha = require('js-sha256')
 const env = process.env.NODE_ENV || 'production'
 const config = require(__dirname + '/config.json')[env]
 
-// 0394c0ceababad8426da667af094e63d7bec35ed4e5580c173e096be0cc317c07a
-
 async function test(){
   const args = minimist(process.argv.slice(2))
   const dest = args['dest']
