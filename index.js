@@ -5,6 +5,11 @@ var crypto = require('crypto')
 var ByteBuffer = require('bytebuffer')
 var sha = require('js-sha256')
 
+// no-rest
+// no-bootstrap
+
+// no syncing graph
+
 const env = process.env.NODE_ENV || 'production'
 const config = require(__dirname + '/config.json')[env]
 
@@ -17,10 +22,17 @@ async function test(){
   const opts = {dest}
   try {
     const r = await keysend(opts)
-    console.log("=> KEYSEND SUCCESS",r)
+    console.log("=> KEYSEND SUCCESS\n",{
+      ...r,
+      ...r.payment_hash && {payment_hash: r.payment_hash.toString('hex')},
+      ...r.payment_preimage && {payment_preimage: r.payment_preimage.toString('hex')},
+    })
   } catch(e) {
-    console.log("=> KEYSEND FAILURE",e)
-  } 
+    console.log("=> KEYSEND FAILURE\n",{
+      payment_error: e
+    })
+  }
+  process.exit(0)
 }
 
 const LND_KEYSEND_KEY = 5482373484
