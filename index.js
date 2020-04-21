@@ -60,7 +60,7 @@ function keysend(opts) {
     const preimage = ByteBuffer.fromHex(randoStr)
     const options = {
       amt: opts.amt || 1,
-      final_cltv_delta: 10,
+      final_cltv_delta: 144,
       dest: ByteBuffer.fromHex(opts.dest),
       dest_custom_records: {
         [`${LND_KEYSEND_KEY}`]: preimage,
