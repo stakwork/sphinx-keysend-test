@@ -59,7 +59,7 @@ function keysend(opts) {
     const randoStr = crypto.randomBytes(32).toString('hex');
     const preimage = ByteBuffer.fromHex(randoStr)
     const options = {
-      amt: opts.amt || 1,
+      amt: opts.amt || 3,
       final_cltv_delta: 144,
       dest: ByteBuffer.fromHex(opts.dest),
       dest_custom_records: {
