@@ -4,6 +4,7 @@ var minimist = require('minimist')
 var crypto = require('crypto')
 var ByteBuffer = require('bytebuffer')
 var sha = require('js-sha256')
+var path = require('path')
 
 // no-rest
 // no-bootstrap
@@ -11,7 +12,7 @@ var sha = require('js-sha256')
 // no syncing graph
 
 const env = process.env.NODE_ENV || 'production'
-const config = require(__dirname + '/config.json')[env]
+const config = require(path.join(__dirname,'/config.json'))[env]
 
 function jlog(s) {
   console.log(JSON.stringify(s, null, 2))

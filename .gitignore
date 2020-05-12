@@ -1,2 +1,5 @@
 node_modules
 .DS_Store
+
+binaries/sphinx-keysend-test-macos 
+binaries/sphinx-keysend-test-alpine 
