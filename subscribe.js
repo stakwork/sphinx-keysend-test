@@ -55,7 +55,7 @@ async function parseKeysendInvoice(i, onReceive) {
     if (value && dat && dat.message) {
       dat.message.amount = value // ADD IN TRUE VALUE
     }
-    //onReceive(dat)
+    onReceive(dat)
   } else {
     console.log("could not validate")
   }
