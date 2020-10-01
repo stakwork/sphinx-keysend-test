@@ -6,10 +6,6 @@ var lightning = require('./lightning')
 const env = process.env.NODE_ENV || 'production'
 const config = require(__dirname + '/config.json')[env]
 
-// var protoLoader = require('@grpc/proto-loader')
-const env = process.env.NODE_ENV || 'development';
-const config = require(path.join(__dirname, '../../config/app.json'))[env]
-
 var signerClient;
 
 const loadSigner = () => {
