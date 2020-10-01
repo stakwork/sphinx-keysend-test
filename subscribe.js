@@ -1,4 +1,5 @@
 const LND = require('./lightning')
+const signer = require('./signer')
 
 function subscribeInvoices(onReceive) {
   return new Promise(async (resolve, reject) => {
