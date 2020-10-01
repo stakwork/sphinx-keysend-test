@@ -55,6 +55,8 @@ async function parseKeysendInvoice(i, onReceive) {
       dat.message.amount = value // ADD IN TRUE VALUE
     }
     onReceive(dat)
+  } else {
+    console.log("could not validate")
   }
 }
 
@@ -73,11 +75,7 @@ async function parseAndVerifyPayload(data) {
       }
       if (v && v.valid) {
         return payload
-      } else {
-        return payload // => RM THIS
       }
-    } else {
-      return payload // => RM THIS
     }
   } catch (e) {
     if (payload) return payload // => RM THIS

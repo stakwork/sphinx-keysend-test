@@ -15,7 +15,8 @@ async function test() {
         return console.log("NO DEST")
     }
 
-    sub.subscribeInvoices(function(){
+    sub.subscribeInvoices(function(data){
+        jlog(data)
         console.log("=> RECEIVED KEYSEND RESPONSE!")
         process.exit(0)
     })
