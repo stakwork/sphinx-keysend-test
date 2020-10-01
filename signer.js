@@ -65,7 +65,7 @@ function ascii_to_hexa(str) {
 }
 
 
-export async function verifyAscii(ascii,sig,pubkey) {
+async function verifyAscii(ascii,sig,pubkey) {
   try {
     const r = await verifyMessage(ascii_to_hexa(ascii),sig,pubkey)
     return r
