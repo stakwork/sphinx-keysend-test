@@ -88,5 +88,5 @@ const loadLightning = () => {
 }
 
 module.exports = {
-  keysend, getMyPubKey, loadCredentials
+  keysend, getMyPubKey, loadCredentials, loadLightning, SPHINX_CUSTOM_RECORD_KEY
 }

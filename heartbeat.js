@@ -1,7 +1,8 @@
 
 var minimist = require('minimist')
-var lightning = require('./lightning')
+var LND = require('./lightning')
 var signer = require('./signer')
+var sub = require('./subscribe')
 
 function jlog(s) {
     console.log(JSON.stringify(s, null, 2))
@@ -13,8 +14,18 @@ async function test() {
     if (!dest) {
         return console.log("NO DEST")
     }
+
+    sub.subscribeInvoices(function(){
+        console.log("=> RECEIVED KEYSEND RESPONSE!")
+        process.exit(0)
+    })
+    setTimeout(()=>{
+        console.log("NEVER RECEIVED RESPONSE")
+        process.exit(0)
+    },15000)
+
     const amt = 10
-    const pub_key = await lightning.getMyPubKey()
+    const pub_key = await LND.getMyPubKey()
     let data = JSON.stringify({
         type: 26, // heartbeat type
         message: { amount: amt },
@@ -24,7 +35,7 @@ async function test() {
     data = data + sig
     const opts = {amt,dest,data}
     try {
-        const r = await lightning.keysend(opts)
+        const r = await LND.keysend(opts)
         console.log("=> KEYSEND SUCCESS")
     } catch (e) {
         console.log(e)
@@ -33,7 +44,6 @@ async function test() {
             payment_error: e
         })
     }
-    process.exit(0)
 }
 
 test()

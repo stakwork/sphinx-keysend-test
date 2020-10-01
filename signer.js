@@ -1,7 +1,7 @@
 
 var grpc = require('grpc')
 var ByteBuffer = require('bytebuffer')
-var lightning = require('./lightning')
+var LND = require('./lightning')
 
 const env = process.env.NODE_ENV || 'production'
 const config = require(__dirname + '/config.json')[env]
@@ -13,7 +13,7 @@ const loadSigner = () => {
     return signerClient
   } else {
     try {
-      var credentials = lightning.loadCredentials()
+      var credentials = LND.loadCredentials()
       var lnrpcDescriptor = grpc.load("signer.proto");
       var signer = lnrpcDescriptor.signrpc
       signerClient = new signer.Signer(config.node_ip + ':' + config.lnd_port, credentials);
@@ -64,6 +64,46 @@ function ascii_to_hexa(str) {
   return arr1.join('');
 }
 
+
+export async function verifyAscii(ascii,sig,pubkey) {
+  try {
+    const r = await verifyMessage(ascii_to_hexa(ascii),sig,pubkey)
+    return r
+  } catch(e) {
+    throw e
+  }
+}
+function verifyMessage(msg,sig,pubkey) {
+  return new Promise(async(resolve, reject)=> {
+    let signer = await loadSigner()
+    if(msg.length===0) {
+      return reject('invalid msg')
+    }
+    if(sig.length!==96) {
+      return reject('invalid sig')
+    }
+    if(pubkey.length!==66) {
+      return reject('invalid pubkey')
+    }
+    try {
+      const options = {
+        msg:ByteBuffer.fromHex(msg),
+        signature:ByteBuffer.fromBase64(sig),
+        pubkey:ByteBuffer.fromHex(pubkey),
+      }
+      signer.verifyMessage(options, function(err,res){
+        if(err) {
+          reject(err)
+        } else {
+          resolve(res)
+        }
+      })
+    } catch(e) {
+      reject(e)
+    }
+  })
+}
+
 module.exports={
-  signAscii
+  signAscii, verifyAscii
 }
