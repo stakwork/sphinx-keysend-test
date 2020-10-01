@@ -54,7 +54,7 @@ async function parseKeysendInvoice(i, onReceive) {
     if (value && dat && dat.message) {
       dat.message.amount = value // ADD IN TRUE VALUE
     }
-    onReceive(dat)
+    //onReceive(dat)
   } else {
     console.log("could not validate")
   }
@@ -70,7 +70,7 @@ async function parseAndVerifyPayload(data) {
     payload = JSON.parse(msg)
     if (payload && payload.sender && payload.sender.pub_key) {
       let v
-      if (sig.length === 96 && payload.sender.pub_key) { // => RM THIS 
+      if (sig.length === 96 && payload.sender.pub_key) {
         v = await signer.verifyAscii(msg, sig, payload.sender.pub_key)
       }
       if (v && v.valid) {
@@ -78,7 +78,7 @@ async function parseAndVerifyPayload(data) {
       }
     }
   } catch (e) {
-    if (payload) return payload // => RM THIS
+    console.log(e)
     return null
   }
 }
