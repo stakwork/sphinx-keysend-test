@@ -57,10 +57,10 @@ function getMyPubKey() {
 
 var lightningClient
 
-const loadCredentials = () => {
+const loadCredentials = (macname) => {
   var lndCert = fs.readFileSync(config.tls_location);
   var sslCreds = grpc.credentials.createSsl(lndCert);
-  var m = fs.readFileSync(config.macaroon_location);
+  var m = fs.readFileSync(config.macaroon_location+macname);
   var macaroon = m.toString('hex');
   var metadata = new grpc.Metadata()
   metadata.add('macaroon', macaroon)
@@ -76,7 +76,7 @@ const loadLightning = () => {
     return lightningClient
   } else {
     try {
-      var credentials = loadCredentials()
+      var credentials = loadCredentials('admin.macaroon')
       var lnrpcDescriptor = grpc.load("rpc.proto");
       var lnrpc = lnrpcDescriptor.lnrpc
       lightningClient = new lnrpc.Lightning(config.node_ip + ':' + config.lnd_port, credentials);
