@@ -1,11 +1,7 @@
 
 var minimist = require('minimist')
 var lightning = require('./lightning')
-
-// no-rest
-// no-bootstrap
-
-// no syncing graph
+var signer = require('./signer')
 
 function jlog(s) {
     console.log(JSON.stringify(s, null, 2))
