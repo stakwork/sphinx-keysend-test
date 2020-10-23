@@ -47,4 +47,21 @@ const buildRoute = (dests, amt) => { // dests: array of hex strings
   })
 }
 
-module.exports={buildRoute}
+const sendToRoute = (opts) => { // dests: array of hex strings
+  return new Promise(async (resolve, reject) => {
+    let router = loadRouter()
+    try {
+      router.sendToRoute(opts, function (err, route) {
+        if (err) {
+          reject(err)
+        } else {
+          resolve(route)
+        }
+      })
+    } catch(e) {
+      reject(e)
+    }
+  })
+}
+
+module.exports={buildRoute,sendToRoute}

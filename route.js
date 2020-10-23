@@ -42,6 +42,9 @@ async function test() {
     console.log(r.route.hops)
     r.payment_hash = sha.sha256.arrayBuffer(preimage.toBuffer())
     console.log(r)
+
+    const j = await router.sendToRoute(r)
+    console.log(j)
   } catch(e) {
     console.log("ERROR",e)
   }
