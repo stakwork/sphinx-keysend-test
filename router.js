@@ -2,6 +2,7 @@
 var grpc = require('grpc')
 var ByteBuffer = require('bytebuffer')
 var LND = require('./lightning')
+var path = require('path')
 
 const env = process.env.NODE_ENV || 'production'
 const config = require(__dirname + '/config.json')[env]
@@ -16,7 +17,7 @@ const loadRouter = () => {
       var credentials = LND.loadCredentials('router.macaroon')
       var lnrpcDescriptor = grpc.load({
         file:'router.proto',
-        root:resolve(__dirname)
+        root: path.resolve(__dirname)
       });
       var signer = lnrpcDescriptor.routerrpc
       routerClient = new signer.Signer(config.node_ip + ':' + config.lnd_port, credentials);
