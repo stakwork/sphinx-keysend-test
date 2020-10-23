@@ -1,9 +1,9 @@
 {
   "development":{
-    "macaroon_location": "/Users/evanfeenstra/code/lnd-dev/alice/data/chain/bitcoin/simnet/",
+    "macaroon_location": "/Users/evanfeenstra/code/lnd-dev/bob/data/chain/bitcoin/simnet/",
     "tls_location": "/Users/evanfeenstra/Library/Application Support/Lnd/tls.cert",
     "node_ip": "127.0.0.1",
-    "lnd_port": "10001"
+    "lnd_port": "10002"
   },
   "production":{
     "macaroon_location": "/relay/.lnd/data/chain/bitcoin/mainnet/",
