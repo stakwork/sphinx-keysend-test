@@ -23,11 +23,10 @@ const loadRouter = () => {
     try {
       var credentials = LND.loadCredentials('router.macaroon')
       var descriptor = protoLoader.loadSync('router.proto', opts)
-      console.log("DESC,",descriptor)
       const defn= grpc.loadPackageDefinition(descriptor);
-      console.log("DEFN,",defn)
+      console.log("DEFN,",Object.keys(defn))
       var router = defn.routerrpc
-      console.log("RPOTUEr",router)
+      // console.log("RPOTUEr",router)
       routerClient = new router.Router(config.node_ip + ':' + config.lnd_port, credentials);
       return routerClient
     } catch (e) {
@@ -38,7 +37,8 @@ const loadRouter = () => {
 
 const buildRoutes = (dests, amt) => { // dests: array of hex strings
   return new Promise(async (resolve, reject) => {
-    let router = await loadRouter()
+    let router = loadRouter()
+    console.log("ROUTER",Object.keys(router))
     try {
       const options = {
         hop_pubkeys: dests.map(d=>ByteBuffer.fromHex(d)),
