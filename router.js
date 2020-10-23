@@ -57,6 +57,4 @@ const buildRoute = (dests, amt) => { // dests: array of hex strings
   })
 }
 
-module.exports={
-  buildRoutes
-}
+module.exports={buildRoute}
