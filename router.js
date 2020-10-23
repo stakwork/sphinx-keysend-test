@@ -25,7 +25,6 @@ const loadRouter = () => {
       var descriptor = protoLoader.loadSync('router.proto', opts)
       const defn= grpc.loadPackageDefinition(descriptor);
       var router = defn.routerrpc
-      console.log("RPOTUEr",router)
       routerClient = new router.Router(config.node_ip + ':' + config.lnd_port, credentials);
       return routerClient
     } catch (e) {
@@ -37,14 +36,14 @@ const loadRouter = () => {
 const buildRoutes = (dests, amt) => { // dests: array of hex strings
   return new Promise(async (resolve, reject) => {
     let router = loadRouter()
-    console.log("ROUTER",Object.keys(router))
     try {
       const options = {
         hop_pubkeys: dests.map(d=>ByteBuffer.fromHex(d)),
         final_cltv_delta: 144,
         amt_msat: amt ? amt*1000 : 3000,
       }
-      router.buildRoutes(options, function (err, route) {
+      console.log("OPTIONS,",options)
+      router.buildRoute(options, function (err, route) {
         if (err) {
           reject(err)
         } else {
