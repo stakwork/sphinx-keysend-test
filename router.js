@@ -51,11 +51,11 @@ const sendToRoute = (opts) => { // dests: array of hex strings
   return new Promise(async (resolve, reject) => {
     let router = loadRouter()
     try {
-      router.sendToRoute(opts, function (err, route) {
+      router.sendToRoute(opts, function (err, res) {
         if (err) {
           reject(err)
         } else {
-          resolve(route)
+          resolve(res)
         }
       })
     } catch(e) {
