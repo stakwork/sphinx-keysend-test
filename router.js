@@ -19,8 +19,8 @@ const loadRouter = () => {
         file:'router.proto',
         root: path.resolve(__dirname)
       });
-      var signer = lnrpcDescriptor.routerrpc
-      routerClient = new signer.Signer(config.node_ip + ':' + config.lnd_port, credentials);
+      var router = lnrpcDescriptor.routerrpc
+      routerClient = new router.Router(config.node_ip + ':' + config.lnd_port, credentials);
       return routerClient
     } catch (e) {
       throw e
