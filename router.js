@@ -4,8 +4,10 @@ var LND = require('./lightning')
 var path = require('path')
 var protoLoader = require("@grpc/proto-loader")
 
+const includePath = path.join(__dirname, "./proto")
+console.log("includePath:", includePath)
 const opts = {
-  includeDirs: [path.resolve(__dirname),'./proto']
+  includeDirs: [includePath]
 }
 
 const env = process.env.NODE_ENV || 'production'
