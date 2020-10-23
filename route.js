@@ -40,7 +40,8 @@ async function test() {
       return h
     })
     console.log(r.route.hops)
-    r.payment_hash = sha.sha256.arrayBuffer(preimage.toBuffer()),
+    r.payment_hash = sha.sha256.arrayBuffer(preimage.toBuffer())
+    console.log(r)
   } catch(e) {
     console.log("ERROR",e)
   }
