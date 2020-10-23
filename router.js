@@ -14,7 +14,10 @@ const loadRouter = () => {
   } else {
     try {
       var credentials = LND.loadCredentials('router.macaroon')
-      var lnrpcDescriptor = grpc.load("router.proto");
+      var lnrpcDescriptor = grpc.load({
+        file:'router.proto',
+        root:resolve(__dirname)
+      });
       var signer = lnrpcDescriptor.routerrpc
       routerClient = new signer.Signer(config.node_ip + ':' + config.lnd_port, credentials);
       return routerClient
