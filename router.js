@@ -24,9 +24,8 @@ const loadRouter = () => {
       var credentials = LND.loadCredentials('router.macaroon')
       var descriptor = protoLoader.loadSync('router.proto', opts)
       const defn= grpc.loadPackageDefinition(descriptor);
-      console.log("DEFN,",Object.keys(defn))
       var router = defn.routerrpc
-      // console.log("RPOTUEr",router)
+      console.log("RPOTUEr",router)
       routerClient = new router.Router(config.node_ip + ':' + config.lnd_port, credentials);
       return routerClient
     } catch (e) {
