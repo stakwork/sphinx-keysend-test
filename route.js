@@ -1,6 +1,11 @@
 
 var minimist = require('minimist')
 var router = require('./router')
+var crypto = require('crypto')
+var ByteBuffer = require('bytebuffer')
+
+const LND_KEYSEND_KEY = 5482373484
+const SPHINX_CUSTOM_RECORD_KEY = 133773310
 
 function jlog(s) {
     console.log(JSON.stringify(s, null, 2))
@@ -22,6 +27,18 @@ async function test() {
   try { 
     const r = await router.buildRoute(hs,3)
     console.log(r)
+    const randoStr = crypto.randomBytes(32).toString('hex');
+    const preimage = ByteBuffer.fromHex(randoStr)
+    r.route.hops = r.route.hops.map((h,i)=>{
+      if(i===r.route.hops.length-1) {
+        return {...h, custom_records:{
+          [`${LND_KEYSEND_KEY}`]: preimage,
+          // [`${SPHINX_CUSTOM_RECORD_KEY}`]: ByteBuffer.fromUTF8(opts.data || '{}'),
+        }}
+      }
+      return h
+    })
+    console.log(r.route.hops)
   } catch(e) {
     console.log("ERROR",e)
   }
