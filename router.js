@@ -4,7 +4,7 @@ var LND = require('./lightning')
 var path = require('path')
 var protoLoader = require("@grpc/proto-loader")
 var grpc = require('grpc');
-var Buffer = require('buffer')
+var Buffer = require('buffer').Buffer;
 
 const includePath = path.join(__dirname, "./proto")
 console.log("includePath:", includePath)
