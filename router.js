@@ -33,7 +33,7 @@ const loadRouter = () => {
   }
 }
 
-const buildRoutes = (dests, amt) => { // dests: array of hex strings
+const buildRoute = (dests, amt) => { // dests: array of hex strings
   return new Promise(async (resolve, reject) => {
     let router = loadRouter()
     try {
@@ -43,6 +43,7 @@ const buildRoutes = (dests, amt) => { // dests: array of hex strings
         amt_msat: amt ? amt*1000 : 3000,
       }
       console.log("OPTIONS,",options)
+      console.log(router.buildRoute)
       router.buildRoute(options, function (err, route) {
         if (err) {
           reject(err)

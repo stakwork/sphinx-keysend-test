@@ -19,7 +19,7 @@ async function test() {
 
   const hs = hops.split(',')
   try { 
-    const r = await router.buildRoutes(hs,3)
+    const r = await router.buildRoute(hs,3)
     consolel.log(r)
   } catch(e) {
     console.log("ERROR",e)
