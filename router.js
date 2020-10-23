@@ -4,6 +4,7 @@ var LND = require('./lightning')
 var path = require('path')
 var protoLoader = require("@grpc/proto-loader")
 var grpc = require('grpc');
+var Buffer = require('buffer')
 
 const includePath = path.join(__dirname, "./proto")
 console.log("includePath:", includePath)
@@ -38,12 +39,11 @@ const buildRoute = (dests, amt) => { // dests: array of hex strings
     let router = loadRouter()
     try {
       const options = {
-        hop_pubkeys: dests.map(d=>ByteBuffer.fromHex(d)),
+        hop_pubkeys: dests.map(d=>Buffer.fromHex(d).toString('base64')),//dests.map(d=>ByteBuffer.fromHex(d)),
         final_cltv_delta: 144,
         amt_msat: amt ? amt*1000 : 3000,
       }
       console.log("OPTIONS,",options)
-      console.log(router.buildRoute)
       router.buildRoute(options, function (err, route) {
         if (err) {
           reject(err)
