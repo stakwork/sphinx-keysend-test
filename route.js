@@ -40,7 +40,6 @@ async function test() {
       return h
     })
     r.payment_hash = sha.sha256.arrayBuffer(preimage.toBuffer())
-    console.log(r)
 
     const j = await router.sendToRoute(r)
     console.log("SUCCESS",j)
