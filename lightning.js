@@ -77,7 +77,7 @@ const loadLightning = () => {
   } else {
     try {
       var credentials = loadCredentials('admin.macaroon')
-      var lnrpcDescriptor = grpc.load("rpc.proto");
+      var lnrpcDescriptor = grpc.load("proto/rpc.proto");
       var lnrpc = lnrpcDescriptor.lnrpc
       lightningClient = new lnrpc.Lightning(config.node_ip + ':' + config.lnd_port, credentials);
       return lightningClient

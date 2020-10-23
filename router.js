@@ -5,7 +5,7 @@ var path = require('path')
 var protoLoader = require("@grpc/proto-loader")
 
 const opts = {
-  includeDirs: [path.resolve(__dirname)]
+  includeDirs: [path.resolve(__dirname),'./proto']
 }
 
 const env = process.env.NODE_ENV || 'production'
