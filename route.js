@@ -3,6 +3,7 @@ var minimist = require('minimist')
 var router = require('./router')
 var crypto = require('crypto')
 var ByteBuffer = require('bytebuffer')
+var sha = require('js-sha256')
 
 const LND_KEYSEND_KEY = 5482373484
 const SPHINX_CUSTOM_RECORD_KEY = 133773310
@@ -39,6 +40,7 @@ async function test() {
       return h
     })
     console.log(r.route.hops)
+    r.payment_hash = sha.sha256.arrayBuffer(preimage.toBuffer()),
   } catch(e) {
     console.log("ERROR",e)
   }
