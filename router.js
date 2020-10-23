@@ -1,8 +1,12 @@
 
-var grpc = require('grpc')
 var ByteBuffer = require('bytebuffer')
 var LND = require('./lightning')
 var path = require('path')
+var protoLoader = require("@grpc/proto-loader")
+
+const opts = {
+  includeDirs: [path.resolve(__dirname)]
+}
 
 const env = process.env.NODE_ENV || 'production'
 const config = require(__dirname + '/config.json')[env]
@@ -15,11 +19,10 @@ const loadRouter = () => {
   } else {
     try {
       var credentials = LND.loadCredentials('router.macaroon')
-      var lnrpcDescriptor = grpc.load({
-        file:'router.proto',
-        root: path.resolve(__dirname)
-      });
-      var router = lnrpcDescriptor.routerrpc
+      var descriptor = protoLoader.loadSync('router.proto', opts)
+      console.log("DESC,",descriptor)
+      var router = descriptor.routerrpc
+      console.log("RPOTUEr",router)
       routerClient = new router.Router(config.node_ip + ':' + config.lnd_port, credentials);
       return routerClient
     } catch (e) {
