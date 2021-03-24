@@ -66,10 +66,12 @@ async function send() {
     const args = minimist(process.argv.slice(2))
     const dest = args['dest']
     const route_hint = args['route_hint'] || ''
+    const amount = args['amt']
+    const amt = parseInt(amount) || 0
     if(!dest){
       return console.log("NO DEST")
     }
-    const opts = {dest, route_hint}
+    const opts = {dest, route_hint, amt}
     const r = await keysend2(opts)
     console.log("=> KEYSEND SUCCESS", r)
   } catch(e) {
