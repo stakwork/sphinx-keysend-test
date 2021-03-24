@@ -64,4 +64,4 @@ const sendToRoute = (opts) => { // dests: array of hex strings
   })
 }
 
-module.exports={buildRoute,sendToRoute}
+module.exports={buildRoute,sendToRoute,loadRouter}
