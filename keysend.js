@@ -67,13 +67,10 @@ async function send() {
     const dest = args['dest']
     const route_hint = args['route_hint'] || ''
     const amount = args['amt']
-    console.log('amount', amount)
     const amt = parseInt(amount) || 0
-    consolel.log('amt', amt)
     if(!dest){
       return console.log("NO DEST")
     }
-    return
     const opts = {dest, route_hint, amt}
     const r = await keysend2(opts)
     console.log("=> KEYSEND SUCCESS", r)
