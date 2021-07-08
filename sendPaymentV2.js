@@ -6,13 +6,14 @@ const payment_request = args.payreq
 
 /*
 export NODE_ENV=proxy_lnd
-node ./sendPaymentV2 --payreq=lnbc10u1pswwdxypp52236w8cgp7ctdujs9ljvh6aw87ujvhj4myzw9vp40vcgta0em86qdqqcqzpgsp54j66a2dun0wzjtddm3wp89kee60qu9nptty05rhf76h0kmpr63gq9qyyssq3d9csz4g7her5zaefalqddsyx7akara9h37awqrc69y5ps4m96xjuekhxqat0l9qjpgg3xp4jfy8l0tv2kfu655xp4janl9vk9rud3gpd35sd4
+node ./sendPaymentV2 --payreq=lnbc10010n1psww3kcpp5kn39xxvcle7yapml336kxlq0l7k44r2vwftgctqghgewwe2us64qdqqcqzpgsp52aywz72ecs0qfuqwpwx38lk4fhg8k566wac3ppmmn6j7wqz6z4tq9qyyssqurt5esae4hksltpgrr93ek63vht64h04rgwjgyu6rvfku2tn845ntzkl7dtdfj8qp4gumdpuvt8wck3tmt5v4gfwtx0egtwwzfr8ylcpr3stgm
 */
 
 const r = router.loadRouter()
 const opts = {
     payment_request,
-    timeout_seconds: 16
+    timeout_seconds: 16,
+    fee_limit_sat: 10,
 }
 const call = r.sendPaymentV2(opts)
 call.on('data', function (payment) {
