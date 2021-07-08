@@ -12,7 +12,7 @@ node ./sendPaymentV2 --payreq=lnbc10u1pswwdxypp52236w8cgp7ctdujs9ljvh6aw87ujvhj4
 const r = router.loadRouter()
 const opts = {
     payment_request,
-    timeou_seconds: 16
+    timeout_seconds: 16
 }
 const call = r.sendPaymentV2(opts)
 call.on('data', function (payment) {
