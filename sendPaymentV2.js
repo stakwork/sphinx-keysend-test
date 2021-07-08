@@ -4,6 +4,11 @@ var minimist = require('minimist')
 const args = minimist(process.argv.slice(2))
 const payment_request = args.payreq
 
+/*
+export NODE_ENV=proxy_lnd
+node ./sendPaymentV2 --payreq=lnbc10u1pswwdxypp52236w8cgp7ctdujs9ljvh6aw87ujvhj4myzw9vp40vcgta0em86qdqqcqzpgsp54j66a2dun0wzjtddm3wp89kee60qu9nptty05rhf76h0kmpr63gq9qyyssq3d9csz4g7her5zaefalqddsyx7akara9h37awqrc69y5ps4m96xjuekhxqat0l9qjpgg3xp4jfy8l0tv2kfu655xp4janl9vk9rud3gpd35sd4
+*/
+
 const r = router.loadRouter()
 const call = r.sendPaymentV2({payment_request})
 call.on('data', function (payment) {
