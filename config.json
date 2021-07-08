@@ -16,5 +16,11 @@
     "tls_location": "/home/ec2-user/.lnd/tls.cert",
     "node_ip": "localhost",
     "lnd_port": "10009"
+  },
+  "proxy_lnd": {
+    "macaroon_location": "/data/lnd/data/chain/bitcoin/mainnet/",
+    "tls_location": "/data/lnd/tls.cert",
+    "node_ip": "127.0.0.1",
+    "lnd_port": "10009"
   }
 }
