@@ -1,11 +1,11 @@
-var rrr = require('./router')
-var minimist = require('minimist')
-var ByteBuffer = require('bytebuffer')
-var crypto = require('crypto')
-var sha = require('js-sha256')
+var rrr = require("./router");
+var minimist = require("minimist");
+var ByteBuffer = require("bytebuffer");
+var crypto = require("crypto");
+var sha = require("js-sha256");
 
-const LND_KEYSEND_KEY = 5482373484
-const SPHINX_CUSTOM_RECORD_KEY = 133773310
+const LND_KEYSEND_KEY = 5482373484;
+const SPHINX_CUSTOM_RECORD_KEY = 133773310;
 
 const keysend2 = (opts) => {
   return new Promise(async function (resolve, reject) {
@@ -18,6 +18,7 @@ const keysend2 = (opts) => {
       dest: ByteBuffer.fromHex(opts.dest),
       dest_custom_records: {
         [`${LND_KEYSEND_KEY}`]: preimage,
+        [`${133773310}`]: "{}",
       },
       payment_hash: sha.sha256.arrayBuffer(preimage.toBuffer()),
       dest_features: [9],
@@ -63,20 +64,20 @@ const keysend2 = (opts) => {
 
 async function send() {
   try {
-    const args = minimist(process.argv.slice(2))
-    const dest = args['dest']
-    const route_hint = args['route_hint'] || ''
-    const amount = args['amt']
-    const amt = parseInt(amount) || 0
-    if(!dest){
-      return console.log("NO DEST")
+    const args = minimist(process.argv.slice(2));
+    const dest = args["dest"];
+    const route_hint = args["route_hint"] || "";
+    const amount = args["amt"];
+    const amt = parseInt(amount) || 0;
+    if (!dest) {
+      return console.log("NO DEST");
     }
-    const opts = {dest, route_hint, amt}
-    const r = await keysend2(opts)
-    console.log("=> KEYSEND SUCCESS", r)
-  } catch(e) {
-    console.log('ERROR', e)
+    const opts = { dest, route_hint, amt };
+    const r = await keysend2(opts);
+    console.log("=> KEYSEND SUCCESS", r);
+  } catch (e) {
+    console.log("ERROR", e);
   }
 }
 
-send()
+send();
