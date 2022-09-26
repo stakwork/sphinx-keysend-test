@@ -18,7 +18,7 @@ const keysend2 = (opts) => {
       dest: ByteBuffer.fromHex(opts.dest),
       dest_custom_records: {
         [`${LND_KEYSEND_KEY}`]: preimage,
-        [`${133773310}`]: "{}",
+        [`${SPHINX_CUSTOM_RECORD_KEY}`]: "{}",
       },
       payment_hash: sha.sha256.arrayBuffer(preimage.toBuffer()),
       dest_features: [9],
