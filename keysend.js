@@ -10,7 +10,6 @@ const SPHINX_CUSTOM_RECORD_KEY = 133773310;
 const TLV_BODY = process.env.TLV_BODY || "{}";
 
 const keysend2 = (opts) => {
-  console.log("=> SEND", TLV_BODY);
   return new Promise(async function (resolve, reject) {
     const FEE_LIMIT_SAT = 10;
     const randoStr = crypto.randomBytes(32).toString("hex");
@@ -21,11 +20,15 @@ const keysend2 = (opts) => {
       dest: ByteBuffer.fromHex(opts.dest),
       dest_custom_records: {
         [`${LND_KEYSEND_KEY}`]: preimage,
-        [`${SPHINX_CUSTOM_RECORD_KEY}`]: TLV_BODY,
+        // [`${SPHINX_CUSTOM_RECORD_KEY}`]: TLV_BODY,
       },
       payment_hash: sha.sha256.arrayBuffer(preimage.toBuffer()),
       dest_features: [9],
     };
+    if (TLV_BODY !== "NONE") {
+      options.dest_custom_records[`${SPHINX_CUSTOM_RECORD_KEY}`] = TLV_BODY;
+      console.log("=> SEND", TLV_BODY);
+    }
     // add in route hints
     if (opts.route_hint && opts.route_hint.includes(":")) {
       const arr = opts.route_hint.split(":");
