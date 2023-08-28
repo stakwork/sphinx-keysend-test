@@ -26,7 +26,10 @@ const keysend2 = (opts) => {
       dest_features: [9],
     };
     if (TLV_BODY !== "NONE") {
-      options.dest_custom_records[`${SPHINX_CUSTOM_RECORD_KEY}`] = TLV_BODY;
+      options.dest_custom_records[`${SPHINX_CUSTOM_RECORD_KEY}`] = Buffer.from(
+        TLV_BODY,
+        "utf-8"
+      );
       console.log("=> SEND", TLV_BODY);
     }
     // add in route hints
