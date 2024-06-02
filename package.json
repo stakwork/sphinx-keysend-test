@@ -4,7 +4,7 @@
   "dependencies": {
     "@grpc/proto-loader": "^0.5.5",
     "bytebuffer": "^5.0.1",
-    "grpc": "^1.24.2",
+    "grpc": "^1.24.10",
     "js-sha256": "^0.9.0",
     "minimist": "^1.2.0"
   }
